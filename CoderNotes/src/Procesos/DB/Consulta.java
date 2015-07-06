@@ -87,9 +87,9 @@ public class Consulta extends Conexion{
             sentencia = conexion.prepareStatement( consulta );
             int longitud = parametros.length;
 
-            if ( parametros.length >= 1 && parametros[ 0 ] != "NP" ){
+            if (longitud >= 1){
 
-                for ( int posicion =1 ; posicion < longitud ; posicion++ ){
+                for ( int posicion = 1 ; posicion < longitud ; posicion++ ){
 
                     sentencia.setObject( posicion, parametros[ posicion-1 ] );
 
