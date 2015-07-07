@@ -1,5 +1,6 @@
 package Procesos.DB;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -104,4 +105,71 @@ public class Consulta extends Conexion{
 
     }
     
+     /**
+     * Callable Statement
+     * 
+     * @param consulta
+     * @param parametros
+     * @return 
+     * @throws java.sql.SQLException 
+     */
+    public int CallableStatement( String consulta, Object [] parametros ) throws SQLException{
+        
+        Connection conexion = super.tomarConexion();
+        
+        if ( conexion.isValid( timeout ) ){
+                
+            CallableStatement cstm;
+            cstm = conexion.prepareCall(consulta, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            for(int i = 0; i < parametros.length;i++){
+                
+                cstm.setObject(i+1, parametros[i]);
+                
+            }   return cstm.executeUpdate();
+
+        } else return -1;
+
+    }
+    
+    /**
+     * Callable Statement With Output
+     * 
+     * @param consulta
+     * @param parametros
+     * @param objetosadevolver
+     * @return 
+     * @throws java.sql.SQLException 
+     */
+    public Object[] CallableStatementWithOutput( String consulta, Object [] parametros , int objetosadevolver) throws SQLException{
+        
+        Connection conexion = super.tomarConexion();
+        
+        if ( conexion.isValid( timeout ) ){
+            
+            Object[] res = new Object[objetosadevolver];
+            CallableStatement cstm;
+            cstm = conexion.prepareCall(consulta, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            for(int i = 0; i < parametros.length;i++){
+                
+                cstm.setObject(i+1, parametros[i]);
+                
+            }
+            for(int x = 0; x < objetosadevolver;x++){
+                
+                cstm.registerOutParameter(x+1+parametros.length, java.sql.Types.OTHER);
+                
+            }
+            if(cstm.executeUpdate() > 0){
+                
+                for(int x = 0; x < objetosadevolver;x++){
+                    
+                    res[x] = cstm.getObject(x+1+parametros.length);
+                    
+                }
+                
+            }   return res;
+
+        } else return null;
+
+    }
 }

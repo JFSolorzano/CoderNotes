@@ -28,7 +28,9 @@ public class CRUD extends Consulta{
     }
     
     public ResultSet consultar( String consulta, Object [] parametros ) throws SQLException{
+        
         return super.DML_DCL( consulta, parametros );
+        
     }
     
 }
