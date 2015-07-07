@@ -154,7 +154,7 @@ public class Consulta extends Conexion{
             
             for( int posicion = 1; posicion <= parametros.length; posicion++ ){
                 
-                callable.setObject( posicion--, parametros[i]);
+                callable.setObject( posicion--, parametros[ posicion ]);
                 
             }
             
