@@ -7,6 +7,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -25,7 +27,15 @@ import sun.misc.BASE64Encoder;
  */
 public class Utilidades {
     
-     public Icon cargarImagen( String archivo, int lado ) {
+    public BufferedImage cargarImagen ( String nombre ) throws IOException{
+        
+        URL recurso = Utilidades.class.getResource("/Recursos/Imagenes/"+nombre);
+        
+        return  ImageIO.read( recurso );
+        
+    }
+    
+     public Icon cargarIcono( String archivo, int lado ) {
         
          ImageIcon imgIcono = new ImageIcon();
          Image imagen;
