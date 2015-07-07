@@ -62,7 +62,7 @@ public class Consulta extends Conexion{
 
             for ( int posicion =1 ; posicion < longitud ; posicion++ ){
 
-                sentencia.setObject( posicion, parametros[ posicion-1 ] );
+                sentencia.setObject( posicion, parametros[ posicion-- ] );
 
             }   return sentencia.executeUpdate();
 
@@ -92,7 +92,7 @@ public class Consulta extends Conexion{
 
                 for ( int posicion = 1 ; posicion < longitud ; posicion++ ){
 
-                    sentencia.setObject( posicion, parametros[ posicion-1 ] );
+                    sentencia.setObject( posicion, parametros[ posicion-- ] );
 
                 }
 
@@ -113,19 +113,20 @@ public class Consulta extends Conexion{
      * @return 
      * @throws java.sql.SQLException 
      */
-    public int CallableStatement( String consulta, Object [] parametros ) throws SQLException{
+    public int callable( String consulta, Object [] parametros ) throws SQLException{
         
         Connection conexion = super.tomarConexion();
         
         if ( conexion.isValid( timeout ) ){
                 
-            CallableStatement cstm;
-            cstm = conexion.prepareCall(consulta, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            for(int i = 0; i < parametros.length;i++){
+            CallableStatement callable;
+            callable = conexion.prepareCall( consulta, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY );
+            
+            for( int posicion = 1; posicion < parametros.length; posicion++ ){
                 
-                cstm.setObject(i+1, parametros[i]);
+                callable.setObject( posicion--, parametros[ posicion-- ] );
                 
-            }   return cstm.executeUpdate();
+            }   return callable.executeUpdate();
 
         } else return -1;
 
@@ -136,38 +137,41 @@ public class Consulta extends Conexion{
      * 
      * @param consulta
      * @param parametros
-     * @param objetosadevolver
+     * @param retorno
      * @return 
      * @throws java.sql.SQLException 
      */
-    public Object[] CallableStatementWithOutput( String consulta, Object [] parametros , int objetosadevolver) throws SQLException{
+    public Object[] callableWithOutput( String consulta, Object [] parametros , int retorno ) throws SQLException{
         
         Connection conexion = super.tomarConexion();
         
         if ( conexion.isValid( timeout ) ){
             
-            Object[] res = new Object[objetosadevolver];
-            CallableStatement cstm;
-            cstm = conexion.prepareCall(consulta, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            for(int i = 0; i < parametros.length;i++){
+            Object[] resultado;
+            resultado = new Object[ retorno ];
+            CallableStatement callable;
+            callable = conexion.prepareCall( consulta, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY );
+            
+            for( int posicion = 1; posicion <= parametros.length; posicion++ ){
                 
-                cstm.setObject(i+1, parametros[i]);
-                
-            }
-            for(int x = 0; x < objetosadevolver;x++){
-                
-                cstm.registerOutParameter(x+1+parametros.length, java.sql.Types.OTHER);
+                callable.setObject( posicion--, parametros[i]);
                 
             }
-            if(cstm.executeUpdate() > 0){
+            
+            for( int posicion = 0; posicion < retorno; posicion++ ){
                 
-                for(int x = 0; x < objetosadevolver;x++){
+                callable.registerOutParameter( (posicion++) + parametros.length, java.sql.Types.OTHER );
+                
+            }
+            if( callable.executeUpdate() > 0 ){
+                
+                for( int posicion = 0; posicion < retorno; posicion++){
                     
-                    res[x] = cstm.getObject(x+1+parametros.length);
+                    resultado[ posicion ] = callable.getObject( (posicion++) + parametros.length );
                     
                 }
                 
-            }   return res;
+            }   return resultado;
 
         } else return null;
 

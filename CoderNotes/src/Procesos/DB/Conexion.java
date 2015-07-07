@@ -26,17 +26,18 @@ public class Conexion {
         fuente.close();
                 
     }
-    
-    public void soltarConexion( Connection conexion ) throws SQLException{
-        
-       conexion.close();
-        
-    }
+
     
     public Connection tomarConexion() throws SQLException{
         
         Connection conexion = fuente.getConnection();
         return conexion;
+        
+    }
+    
+    public void soltarConexion( Connection conexion ) throws SQLException{
+        
+       conexion.close();
         
     }
     
