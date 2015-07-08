@@ -4,7 +4,9 @@ package Vistas.Sesion;
 import Procesos.Utilidades;
 import Vistas.General.Menu;
 import com.alee.extended.transition.ComponentTransition;
+import com.alee.extended.transition.TransitionAdapter;
 import java.awt.Cursor;
+import java.io.IOException;
 import javax.swing.JPanel;
 
 /**
@@ -30,29 +32,36 @@ public class Ingreso extends JPanel {
         initComponents();
         componentesPersonalizados();
         listeners();
-        //Inicializacion de los niveles
+        try {
+            
+            Logo.setImage(utilidades.cargarImagen("logo.png", 105, 100));
+        
+        } catch (IOException ex) {
+            //
+        }
+            //Inicializacion de los niveles
 //        Ingreso.this.anchoPantalla = Principal.anchoPantalla;
 //        Ingreso.this.altoPantalla = Principal.altoPantalla;
 //        Ingreso.this.pantallaCompleta = Principal.pantallaCompleta;
-//        Ingreso.this.tiempoFondo = new Timer();      
+//        Ingreso.this.tiempoFondo = new Timer();
                 
 //        Ingreso.this.nombreImagenes = Arrays.asList("1.jpg", "2.jpg", "5.jpg", "4.jpg", "3.jpg");
 //        Ingreso.this.fondos = new ArrayList<>();
 //        Ingreso.this.imagenesTransitadas = new ArrayList<>();
-        
-        
+            
+            
 //        //Damos valor a las dimensiones del panel
 //        ingresoPanel.setBounds(
-//                0, 
-//                ( ( altoPantalla/2 ) - ( altoPantalla - 75 ) ), 
-//                anchoPantalla, 
+//                0,
+//                ( ( altoPantalla/2 ) - ( altoPantalla - 75 ) ),
+//                anchoPantalla,
 //                ( altoPantalla/3 ) 
 //        );
-                       
-        //Cargamos las imagenes al array
+            
+            //Cargamos las imagenes al array
 //        cargarImagenes();
-        
-        //Inicializamos los componenetes
+            
+            //Inicializamos los componenetes
        
 //        //Runnable que cambiara el fondo cada 5 segundos
 //        Runnable cambiar = () -> {
@@ -62,7 +71,7 @@ public class Ingreso extends JPanel {
 //        //Configuraciones del runnable
 //        ScheduledExecutorService servicio = Executors.newSingleThreadScheduledExecutor();
 //        servicio.scheduleAtFixedRate(cambiar, 0, 5, TimeUnit.SECONDS);
-                
+                        
     }
     
     private void componentesPersonalizados(){
@@ -81,10 +90,11 @@ public class Ingreso extends JPanel {
         Ingresar.addActionListener( ae -> {
             
             //Hacer la transicion a el Menu
-            componenteTransitorioPrincipal.performTransition(new Menu());
+            componenteTransitorioPrincipal.performTransition(new Menu( componenteTransitorioPrincipal ));
         
         });
     
+        
     }
     
     
@@ -146,6 +156,7 @@ public class Ingreso extends JPanel {
         Contrasena = new com.alee.laf.text.WebPasswordField();
         ContrasenaBoton = new com.alee.laf.button.WebButton();
         UsuarioBoton = new com.alee.laf.button.WebButton();
+        Logo = new com.alee.extended.image.WebImage();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -201,12 +212,18 @@ public class Ingreso extends JPanel {
                             .addComponent(UsuarioBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addGap(15, 15, 15)
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -228,6 +245,7 @@ public class Ingreso extends JPanel {
     public com.alee.laf.text.WebPasswordField Contrasena;
     private com.alee.laf.button.WebButton ContrasenaBoton;
     private com.alee.laf.button.WebButton Ingresar;
+    private com.alee.extended.image.WebImage Logo;
     private com.alee.extended.label.WebLinkLabel OlvideContrasena;
     public com.alee.laf.text.WebTextField Usuario;
     public com.alee.laf.button.WebButton UsuarioBoton;

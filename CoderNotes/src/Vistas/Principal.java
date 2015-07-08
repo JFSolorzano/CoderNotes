@@ -1,8 +1,11 @@
 package Vistas;
 
 import Procesos.Animacion.Transiciones;
+import Procesos.Utilidades;
 import Vistas.Sesion.Ingreso;
+import com.alee.extended.image.WebImage;
 import com.alee.extended.transition.ComponentTransition;
+import com.alee.extended.transition.TransitionAdapter;
 import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.rootpane.WebFrame;
 import java.awt.Color;
@@ -11,6 +14,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -21,6 +27,7 @@ public class Principal extends WebFrame {
 
     String OS = System.getProperty("os.name").toLowerCase();
     Ingreso ingreso;
+    public static WebFrame principal;
     public static Dimension pantallaCompleta;
     public static int anchoPantalla, altoPantalla;
     Component centroPantalla;
@@ -31,6 +38,7 @@ public class Principal extends WebFrame {
         Principal.pantallaCompleta = Toolkit.getDefaultToolkit().getScreenSize();        
         Principal.anchoPantalla = pantallaCompleta.getSize().width;
         Principal.altoPantalla = pantallaCompleta.getSize().height;
+        Principal.principal = Principal.this;
 
         //Verificacion de OS
 //        if (OS.startsWith("mac os x")) {
@@ -58,7 +66,12 @@ public class Principal extends WebFrame {
         this.setResizable(false);
                 
         //Configuraciones para el componente transitorio       
-        componenteTransitorio.setTransitionEffect( Transiciones.desvanecimiento());
+        try {
+            componenteTransitorio.setTransitionEffect( Transiciones.desvanecimiento());
+            componenteTransitorio.setContent(new WebImage( new Utilidades().cargarImagen("fondoLogo.png")));
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         componenteTransitorio.performTransition( ingreso );
         
         //    Modo Exclusivo para Videojuegos
@@ -86,6 +99,15 @@ public class Principal extends WebFrame {
             
             }
             
+        });
+        
+        componenteTransitorio.addTransitionListener(new TransitionAdapter() {
+            @Override
+            public void transitionStarted() {
+                Principal.cambiarTamano( Principal.this , componenteTransitorio, 825, 501 );
+                Principal.this.center();
+            }
+
         });
                 
     }
