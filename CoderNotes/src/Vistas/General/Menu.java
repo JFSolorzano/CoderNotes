@@ -111,12 +111,13 @@ public class Menu extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         BarraNavegacion = new com.alee.laf.panel.WebPanel();
         MenuOpciones = new panel.PanelAvatarChooser();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(825, 408));
+        setMinimumSize(new java.awt.Dimension(825, 408));
 
         MenuOpciones.setColorPrimario(new java.awt.Color(255, 255, 255));
         MenuOpciones.setColorSecundario(new java.awt.Color(255, 255, 255));
@@ -129,9 +130,7 @@ public class Menu extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BarraNavegacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(MenuOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))))
+                    .addComponent(MenuOpciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
