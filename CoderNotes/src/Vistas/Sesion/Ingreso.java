@@ -4,7 +4,6 @@ package Vistas.Sesion;
 import Procesos.Utilidades;
 import Vistas.General.Menu;
 import com.alee.extended.transition.ComponentTransition;
-import com.alee.extended.transition.TransitionAdapter;
 import java.awt.Cursor;
 import java.io.IOException;
 import javax.swing.JPanel;
@@ -71,6 +70,7 @@ public class Ingreso extends JPanel {
 //        //Configuraciones del runnable
 //        ScheduledExecutorService servicio = Executors.newSingleThreadScheduledExecutor();
 //        servicio.scheduleAtFixedRate(cambiar, 0, 5, TimeUnit.SECONDS);
+        repaint();
                         
     }
     

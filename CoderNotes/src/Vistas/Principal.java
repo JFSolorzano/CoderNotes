@@ -104,7 +104,7 @@ public class Principal extends WebFrame {
         componenteTransitorio.addTransitionListener(new TransitionAdapter() {
             @Override
             public void transitionStarted() {
-                Principal.cambiarTamano( Principal.this , componenteTransitorio, 825, 501 );
+                Principal.cambiarTamano( Principal.this , componenteTransitorio, 825, 500 );
                 Principal.this.center();
             }
 

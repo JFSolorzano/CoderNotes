@@ -3,18 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vistas.Registros;
+package Vistas.Registros.Notas;
+
+import Vistas.Registros.Lenguajes.*;
+import Vistas.Registros.*;
 
 /**
  *
  * @author JSolorzano
  */
-public class Agregar extends javax.swing.JPanel {
+public class Editar extends javax.swing.JPanel {
 
     /**
-     * Creates new form Agregar
+     * Creates new form Editar
      */
-    public Agregar() {
+    public Editar() {
         initComponents();
     }
 

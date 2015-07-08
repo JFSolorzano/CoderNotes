@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vistas.Registros;
+package Vistas.Registros.Notas;
+
+import Vistas.Registros.Lenguajes.*;
+import Vistas.Registros.*;
 
 /**
  *

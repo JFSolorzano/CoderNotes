@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vistas.Registros;
+package Vistas.Registros.Usuarios;
+
+import Vistas.Registros.*;
 
 /**
  *
  * @author JSolorzano
  */
-public class Editar extends javax.swing.JPanel {
+public class Ver extends javax.swing.JPanel {
 
     /**
-     * Creates new form Editar
+     * Creates new form Ver
      */
-    public Editar() {
+    public Ver() {
         initComponents();
     }
 

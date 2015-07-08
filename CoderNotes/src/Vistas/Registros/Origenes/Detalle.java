@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vistas.Registros;
+package Vistas.Registros.Origenes;
+
+import Vistas.Registros.*;
 
 /**
  *
  * @author JSolorzano
  */
-public class Ver extends javax.swing.JPanel {
+public class Detalle extends javax.swing.JPanel {
 
     /**
-     * Creates new form Ver
+     * Creates new form Detalle
      */
-    public Ver() {
+    public Detalle() {
         initComponents();
     }
 
