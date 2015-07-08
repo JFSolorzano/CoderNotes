@@ -1,22 +1,17 @@
 package Vistas;
 
 import Procesos.Animacion.Transiciones;
-import Procesos.Utilidades;
 import Vistas.Sesion.Ingreso;
-import com.alee.extended.image.WebImage;
-import com.alee.extended.transition.TransitionListener;
+import com.alee.extended.transition.ComponentTransition;
 import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.rootpane.WebFrame;
-import com.alee.utils.SwingUtils;
-import javax.swing.JFrame;
-import static com.apple.eawt.Application.getApplication;
-import static com.apple.eawt.FullScreenUtilities.setWindowCanFullScreen;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 
 /**
  *
@@ -26,62 +21,82 @@ public class Principal extends WebFrame {
 
     String OS = System.getProperty("os.name").toLowerCase();
     Ingreso ingreso;
-    Timer transicion;
+    public static Dimension pantallaCompleta;
+    public static int anchoPantalla, altoPantalla;
+    Component centroPantalla;
 
     public Principal() {
+        
+        //Inicializacion de variables
+        Principal.pantallaCompleta = Toolkit.getDefaultToolkit().getScreenSize();        
+        Principal.anchoPantalla = pantallaCompleta.getSize().width;
+        Principal.altoPantalla = pantallaCompleta.getSize().height;
 
-        this.ingreso = new Ingreso();
-        this.transicion = new Timer();
-
-        if (OS.startsWith("mac os x")) {
-
-            setWindowCanFullScreen(Principal.this, true);
-            getApplication().requestToggleFullScreen(Principal.this);
-
-        } else {
-
-            setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        }
+        //Verificacion de OS
+//        if (OS.startsWith("mac os x")) {
+//
+//            setWindowCanFullScreen( Principal.this, true );
+//            getApplication().requestToggleFullScreen( Principal.this );
+//
+//        } else {
+//
+//            setExtendedState(WebFrame.MAXIMIZED_BOTH);
+//
+//        }
+        
+        //Expandir aplicacion a pantalla completa
+//        this.setExtendedState(WebFrame.MAXIMIZED_BOTH | this.getExtendedState());
+        
+        //Cargar Componentes de la vista
         initComponents();
-
-        transicion.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-
-                componenteTransitorio.performTransition(ingreso);
-                transicion.cancel();
-
-            }
-
-        }, 5 * 1000);
-
-        BufferedImage imagen = null;
-        try {
-            imagen = new Utilidades().cargarImagen("1.jpg");
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        WebImage logo = new WebImage(imagen);
-
-        componenteTransitorio.setTransitionEffect(Transiciones.corredorDesvanecimiento());
-        componenteTransitorio.setContent(logo);
-        componenteTransitorio.setPreferredSize(SwingUtils.max(logo, ingreso));
-
-        try {
-            Thread.sleep(4000);
-            componenteTransitorio.performTransition(ingreso);
-
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        //    Modo Exclusivo
+        
+        this.ingreso = new Ingreso( componenteTransitorio );
+        Principal.cambiarTamano( Principal.this , componenteTransitorio, 300, 275 );
+        
+        //Centramos y evitamos resize
+        this.center();
+        this.setResizable(false);
+                
+        //Configuraciones para el componente transitorio       
+        componenteTransitorio.setTransitionEffect( Transiciones.desvanecimiento());
+        componenteTransitorio.performTransition( ingreso );
+        
+        //    Modo Exclusivo para Videojuegos
         //    GraphicsDevice dispositivo = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         //    dispositivo.setFullScreenWindow(Principal.this);
+        
+        //Pintamos el fondo de blanco
+        getContentPane().setBackground(Color.WHITE);
+        
+        //Agregamos los listeners a los componentes
+        listeners();
+        
+        //Iniciamos la aplicacion sobre todo lo demas
+        toFront();
     }
 
+    private void listeners(){
+        
+        Principal.this.addComponentListener(new ComponentAdapter() {
+            
+            @Override
+            public void componentShown(ComponentEvent e){
+                //Asignamos el valor del medio de la pantalla
+                centroPantalla = e.getComponent();
+            
+            }
+            
+        });
+                
+    }
+    
+    public static void cambiarTamano( WebFrame frame, ComponentTransition ct,  int ancho, int alto ){
+    
+        frame.setSize( ancho, alto );
+        ct.setBounds( 0, 0, ancho, alto );
+    
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -91,17 +106,8 @@ public class Principal extends WebFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         componenteTransitorio.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(componenteTransitorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(componenteTransitorio, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
-        );
+        componenteTransitorio.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
+        getContentPane().add(componenteTransitorio, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -111,6 +117,7 @@ public class Principal extends WebFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
 
+            WebLookAndFeel.install();
             new Principal().setVisible(true);
 
         });

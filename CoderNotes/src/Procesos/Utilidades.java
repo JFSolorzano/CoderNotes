@@ -1,13 +1,16 @@
 package Procesos;
 
+import Procesos.Animacion.MargenTextField;
 import Procesos.DB.Consulta;
+import com.alee.laf.button.WebButton;
+import com.alee.laf.text.WebTextField;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -18,6 +21,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
+import org.imgscalr.Scalr;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -27,9 +32,17 @@ import sun.misc.BASE64Encoder;
  */
 public class Utilidades {
     
-    public BufferedImage cargarImagen ( String nombre ) throws IOException{
+    public BufferedImage cargarImagen ( String direccion, int ancho, int alto) throws IOException{
         
-        URL recurso = Utilidades.class.getResource("/Recursos/Imagenes/"+nombre);
+        URL recurso = Utilidades.class.getResource("/Recursos/Imagenes/"+direccion);
+        
+        return  Scalr.resize(ImageIO.read( recurso ), ancho, alto);
+        
+    }
+    
+    public BufferedImage cargarImagen ( String direccion) throws IOException{
+        
+        URL recurso = Utilidades.class.getResource("/Recursos/Imagenes/"+direccion);
         
         return  ImageIO.read( recurso );
         
@@ -41,7 +54,7 @@ public class Utilidades {
          Image imagen;
 
          try {
-             imgIcono = new ImageIcon( getClass().getResource( archivo ) );
+             imgIcono = new ImageIcon( getClass().getResource( "/Recursos/Imagenes/"+archivo ) );
              imagen = imgIcono.getImage().getScaledInstance( lado, lado, Image.SCALE_SMOOTH );
              imgIcono = new ImageIcon(imagen);
 
@@ -100,6 +113,41 @@ public class Utilidades {
         }
         return imageString;
     }
+     
+     public void bordeMedioPersonalizado(JTextComponent txt){
+     
+         txt.setBackground(new Color(0, 0, 0, 0));
+         txt.setBorder(new MargenTextField(
+                 8,
+                 6,
+                 txt.getHeight(),
+                 txt.getWidth(),
+                 "Bordes/medio.png"
+         ));
+         
+     }
+     
+     public void bordeCompletoPersonalizado(WebTextField txt){
+     
+         txt.setBackground(new Color(0, 0, 0, 0));
+         txt.setBorder(new MargenTextField(
+                 8,
+                 6,
+                 txt.getHeight(),
+                 txt.getWidth(),
+                 "Bordes/completo.png"
+         ));
+         
+     }
+     
+     public void botonIconoTransparente(WebButton btn, String imagen, int cuadrado){
+            
+            btn.setUndecorated(true);
+            btn.setLeftRightSpacing(0);
+            btn.setMoveIconOnPress(true);
+            btn.setIcon(cargarIcono(imagen, cuadrado));
+                
+     }
      
      public DefaultTableModel llenarTabla( String sentencia, Object[] datos ){
                  
