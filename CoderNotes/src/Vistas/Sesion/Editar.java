@@ -3,20 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vistas.Registros.Usuarios;
+package Vistas.Sesion;
 
-import Vistas.Registros.*;
 
 /**
  *
  * @author JSolorzano
  */
-public class Agregar extends javax.swing.JPanel {
+public class Editar extends javax.swing.JPanel {
 
     /**
      * Creates new form Agregar
      */
-    public Agregar() {
+    public Editar() {
         initComponents();
     }
 
@@ -33,7 +32,7 @@ public class Agregar extends javax.swing.JPanel {
         Contenido = new com.alee.laf.panel.WebPanel();
         Correo = new com.alee.laf.text.WebTextField();
         NombreImagen = new com.alee.extended.image.WebImage();
-        Agregar = new com.alee.laf.button.WebButton();
+        Editar = new com.alee.laf.button.WebButton();
         Cancelar = new com.alee.laf.button.WebButton();
         Usuario = new com.alee.laf.text.WebTextField();
         ContrasenaImagen = new com.alee.extended.image.WebImage();
@@ -58,7 +57,7 @@ public class Agregar extends javax.swing.JPanel {
         NombreImagen.setMinimumSize(new java.awt.Dimension(25, 25));
         NombreImagen.setPreferredSize(new java.awt.Dimension(25, 25));
 
-        Agregar.setText("Agregar");
+        Editar.setText("Agregar");
 
         Cancelar.setText("Cancelar");
 
@@ -127,7 +126,7 @@ public class Agregar extends javax.swing.JPanel {
                         .addGroup(ContenidoLayout.createSequentialGroup()
                             .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(78, 78, 78)
-                            .addComponent(Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(ContenidoLayout.createSequentialGroup()
                         .addComponent(ConfirmarContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -156,7 +155,7 @@ public class Agregar extends javax.swing.JPanel {
                     .addComponent(ConfirmarContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(ContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
@@ -179,7 +178,6 @@ public class Agregar extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.alee.laf.button.WebButton Agregar;
     private com.alee.laf.panel.WebPanel BarraNavegacion;
     private com.alee.laf.button.WebButton Cancelar;
     public com.alee.laf.text.WebTextField ConfirmarContrasena;
@@ -189,6 +187,7 @@ public class Agregar extends javax.swing.JPanel {
     private com.alee.extended.image.WebImage ContrasenaContrasenaImagen1;
     private com.alee.extended.image.WebImage ContrasenaImagen;
     public com.alee.laf.text.WebTextField Correo;
+    private com.alee.laf.button.WebButton Editar;
     private com.alee.extended.image.WebImage NombreImagen;
     public com.alee.laf.text.WebTextField Usuario;
     // End of variables declaration//GEN-END:variables

@@ -73,7 +73,7 @@ public class Menu extends javax.swing.JPanel {
                         componenteTransitorioPrincipal.performTransition(new Vistas.Registros.Origenes.Ver());
                         break;
                     case "Notas":
-                        componenteTransitorioPrincipal.performTransition(new Vistas.Registros.Notas.Ver());
+                        componenteTransitorioPrincipal.performTransition(new Vistas.Registros.Notas.Ver( componenteTransitorioPrincipal ));
                         break;
                 }
             
@@ -96,7 +96,7 @@ public class Menu extends javax.swing.JPanel {
                             componenteTransitorioPrincipal.performTransition(new Vistas.Registros.Origenes.Ver());
                             break;
                         case "Notas":
-                            componenteTransitorioPrincipal.performTransition(new Vistas.Registros.Notas.Ver());
+                            componenteTransitorioPrincipal.performTransition(new Vistas.Registros.Notas.Ver( componenteTransitorioPrincipal ));
                             break;
                     }
                     

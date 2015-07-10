@@ -67,7 +67,7 @@
                           <Group type="102" attributes="0">
                               <Component id="Cancelar" min="-2" pref="85" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                              <Component id="Agregar" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="Editar" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -106,7 +106,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Agregar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Editar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="Cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="70" max="32767" attributes="0"/>
@@ -156,7 +156,7 @@
             <Property name="useNullLayout" type="boolean" value="true"/>
           </Layout>
         </Container>
-        <Component class="com.alee.laf.button.WebButton" name="Agregar">
+        <Component class="com.alee.laf.button.WebButton" name="Editar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar"/>
           </Properties>
